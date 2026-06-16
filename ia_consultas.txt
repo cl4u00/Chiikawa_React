@@ -1,0 +1,50 @@
+# Registro de Migración: Proyecto "Mundo Chiikawa" a React + Vite
+
+## Resumen del Proyecto
+Migración íntegra de un proyecto web tradicional (HTML, CSS, Vanilla JS) a una Single Page Application (SPA) utilizando React y Vite, manteniendo la estructura de nombres, clases y recursos visuales originales. Método de trabajo utilizado: "Construcción en Torre" (paso por paso).
+
+---
+
+### Piso 1: Preparación del Terreno y Activos (Assets)
+* **Prompt del usuario:** Solicitud de migrar el proyecto a React + Vite de forma íntegra, trabajando paso a paso, sin modificar nombres originales ni añadir elementos extraños para facilitar la migración.
+* **Acciones realizadas:**
+  * Generación del proyecto con Vite (`npm create vite@latest`).
+  * Limpieza de archivos boilerplate (`App.css`, `react.svg`, `vite.svg`).
+  * Vaciado completo del archivo `index.css`.
+  * Configuración de la carpeta estática `public/`: Se crearon las subcarpetas `public/images/` y `public/registro/images/` y se movieron todos los `.png`, `.gif` y `.webp` originales allí. Esto garantizó que las rutas HTML originales (ej. `src="images/..."`) funcionaran en React sin romperse.
+
+### Piso 2: Cimientos Visuales (Archivos CSS)
+* **Prompt del usuario:** Confirmación de que las imágenes estaban en su lugar y el proyecto base limpio.
+* **Acciones realizadas:**
+  * Creación de `src/chiikawa.css` y `src/registro.css` copiando el código exacto de los archivos originales.
+  * Resolución de conflicto de SPA: Se reemplazaron los selectores `body { ... }` originales por clases contenedoras (`.pagina-chiikawa` y `.pagina-registro`) para evitar que los fondos de ambas pantallas colisionaran al ser renderizados en el único `index.html` de React.
+  * Importación global de estilos en `main.jsx`.
+
+### Piso 3: Enrutamiento y Corrección de Entorno
+* **Prompt del usuario:** Reporte de error en consola `npm error Missing script: dev` y fallos al instalar dependencias.
+* **Acciones realizadas:**
+  * Diagnóstico del problema: La terminal estaba ejecutando comandos en el directorio padre en lugar de la raíz del proyecto Vite (`proyectoChiikawa`).
+  * Se corrigió la ruta en la terminal (`cd proyectoChiikawa`).
+  * Instalación de `react-router-dom`.
+  * Creación de la carpeta `src/pages/` con los componentes base `Chiikawa.jsx` y `Registro.jsx`.
+  * Configuración del enrutador en `App.jsx` usando `<BrowserRouter>`, `<Routes>` y `<Route>`.
+
+### Piso 4: Componente Principal y Resolución de Bugs CSS
+* **Prompt del usuario:** Reporte de error de compilación de Vite (`[plugin:vite:css] Inesperado }`) en `registro.css`.
+* **Acciones realizadas:**
+  * Debugging: Se detectó que el traductor automático del navegador había modificado una regla CSS original de `z-index: 1;` a `índice z: 1;` y había añadido una llave `}` sobrante. Se corrigió.
+  * Transformación del archivo `chiikawa.html` a `Chiikawa.jsx`.
+  * Cambios de sintaxis requeridos por React: `class` a `className`, cierre estricto de etiquetas (`<img />`).
+  * Lógica nativa: Se eliminó la dependencia de scripts externos y se implementó un `useState` para controlar la apertura y cierre del menú hamburguesa, además de un `useEffect` para leer el `localStorage` y saludar al usuario logueado.
+  * Corrección menor durante el proceso: Solución al error de "pantalla en blanco" recordando guardar el archivo en VS Code (`Ctrl + S`).
+
+### Piso 5: Componente de Registro y Lógica de Navegación
+* **Prompt del usuario:** Entrega del código HTML correspondiente a la página de registro e inicio de sesión.
+* **Acciones realizadas:**
+  * Transformación del HTML de login/registro a `Registro.jsx`.
+  * Refactorización de JavaScript: Se eliminó el antiguo archivo `app.js`. La lógica de cambiar entre "Login", "Registro" y "Contacto" se integró usando un estado de React (`vistaActiva`).
+  * Implementación de autenticación simulada: Se añadieron funciones `onSubmit` a los formularios que guardan el nombre del usuario en el `localStorage`.
+  * Navegación programática: Se utilizó el hook `useNavigate` para redirigir al usuario automáticamente a la página principal (`/`) al completar un registro o inicio de sesión exitoso.
+
+---
+**Estado Final:** Migración exitosa. El proyecto es ahora una aplicación de React completamente funcional.
