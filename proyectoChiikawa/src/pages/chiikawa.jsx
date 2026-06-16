@@ -1,10 +1,15 @@
+import Cart from '../components/Cart';
+import { useContext } from 'react';
+import { CartContext } from '../context/CartContext';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function Chiikawa() {
+  const { cart, addToCart } = useContext(CartContext);
   // Estados para controlar el menú hamburguesa y el usuario logueado
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [usuario, setUsuario] = useState(null);
+  const [carritoAbierto, setCarritoAbierto] = useState(false);
 
   useEffect(() => {
     // Al cargar la página, verificamos si hay alguien logueado
@@ -40,13 +45,21 @@ function Chiikawa() {
         </div>
 
         <nav className="menu-principal">
-          <ul>
-            <li><a href="#introduccion">Historia</a></li>
-            <li><a href="#recetas-saladas">Recetas Saladas</a></li>
-            <li><a href="#postres">Postres</a></li>
-            <li><a href="#redes-footer">Contacto</a></li>
-          </ul>
-        </nav>
+       <ul>
+         <li><a href="#introduccion">Historia</a></li>
+         <li><a href="#recetas-saladas">Recetas Saladas</a></li>
+         <li><a href="#postres">Postres</a></li>
+         <li><a href="#redes-footer">Contacto</a></li>
+         {/* Nuevo botón para el carrito 👇 */}
+         <li>
+           <button 
+             onClick={() => setCarritoAbierto(true)} 
+             style={{ background: 'none', border: 'none', color: '#4980f8', fontWeight: 'bold', cursor: 'pointer', fontSize: '16px' }}>
+             🛒 Ver Carrito
+           </button>
+         </li>
+       </ul>
+     </nav>
 
         {/* Menú de usuario (Hamburguesa) */}
         <div className="user-menu-container">
@@ -445,8 +458,16 @@ function Chiikawa() {
           <polyline points="18 15 12 9 6 15"></polyline>
         </svg>
       </a>
+      {/* Si carritoAbierto es true, mostramos el componente Cart */}
+   {carritoAbierto && <Cart onClose={() => setCarritoAbierto(false)} />}
     </div>
   );
 }
+
+//boton de compras//
+
+<button onClick={() => addToCart({ id: 1, name: 'Peluche Chiikawa', price: 15 })}>
+  ¡Comprar Peluche! 🤑
+</button>
 
 export default Chiikawa;
