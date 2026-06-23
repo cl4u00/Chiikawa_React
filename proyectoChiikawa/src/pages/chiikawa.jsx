@@ -85,23 +85,23 @@ function Chiikawa() {
         <section className="carrusel-container">
           <div className="carrusel-pista">
             <div className="carrusel-item"><img src="images/sushi.png" alt="1" /></div>
-            <div className="carrusel-item"><img src="images/pan.png" alt="2" /></div>
-            <div className="carrusel-item"><img src="images/pudding.png" alt="3" /></div>
-            <div className="carrusel-item"><img src="images/cocinando.png" alt="4" /></div>
-            <div className="carrusel-item"><img src="images/panqueques.png" alt="5" /></div>
+            <div className="carrusel-item"><img src="images/pan_pizza.png" alt="2" /></div>
+            <div className="carrusel-item"><img src="images/puding.png" alt="3" /></div>
+            <div className="carrusel-item"><img src="images/sopa.png" alt="4" /></div>
+            <div className="carrusel-item"><img src="images/pancakes.png" alt="5" /></div>
             <div className="carrusel-item"><img src="images/canele.png" alt="6" /></div>
-            <div className="carrusel-item"><img src="images/frijolverde.png" alt="7" /></div>
-            <div className="carrusel-item"><img src="images/spaghetti.png" alt="8" /></div>
+            <div className="carrusel-item"><img src="images/relleno.png" alt="7" /></div>
+            <div className="carrusel-item"><img src="images/pasta.png" alt="8" /></div>
             
             {/* Duplicados para el efecto infinito */}
             <div className="carrusel-item"><img src="images/sushi.png" alt="1" /></div>
-            <div className="carrusel-item"><img src="images/pan.png" alt="2" /></div>
-            <div className="carrusel-item"><img src="images/pudding.png" alt="3" /></div>
-            <div className="carrusel-item"><img src="images/cocinando.png" alt="4" /></div>
-            <div className="carrusel-item"><img src="images/panqueques.png" alt="5" /></div>
+            <div className="carrusel-item"><img src="images/pan_pizza.png" alt="2" /></div>
+            <div className="carrusel-item"><img src="images/puding.png" alt="3" /></div>
+            <div className="carrusel-item"><img src="images/sopa.png" alt="4" /></div>
+            <div className="carrusel-item"><img src="images/pancakes.png" alt="5" /></div>
             <div className="carrusel-item"><img src="images/canele.png" alt="6" /></div>
-            <div className="carrusel-item"><img src="images/frijolverde.png" alt="7" /></div>
-            <div className="carrusel-item"><img src="images/spaghetti.png" alt="8" /></div>
+            <div className="carrusel-item"><img src="images/relleno.png" alt="7" /></div>
+            <div className="carrusel-item"><img src="images/pasta.png" alt="8" /></div>
           </div>
         </section>
       </header>
@@ -120,7 +120,7 @@ function Chiikawa() {
           <article>
             <h3>Pot-au-feu</h3>
             <div className="cuerpo-receta">
-              <img src="images/cocinando.png" alt="Imagen de Pot-au-feu" />
+              <img src="images/sopa.png" alt="Imagen de Pot-au-feu" />
               <aside>
                 <h4>Ingredientes</h4>
                 <ul>
@@ -154,7 +154,7 @@ function Chiikawa() {
           <article>
             <h3>Pan de Pizza (Estilo Cueva)</h3>
             <div className="cuerpo-receta">
-              <img src="images/pan.png" alt="Imagen de Pan de Pizza" />
+              <img src="images/pan_pizza.png" alt="Imagen de Pan de Pizza" />
               <aside>
                 <h4>Ingredientes</h4>
                 <p><strong>La Masa</strong></p>
@@ -238,7 +238,7 @@ function Chiikawa() {
           <article>
             <h3>Spaghetti Medusa (Pasta con Salchichas)</h3>
             <div className="cuerpo-receta">
-              <img src="images/spaghetti.png" alt="Imagen de Hachiware cocinando pasta" />
+              <img src="images/pasta.png" alt="Imagen de Hachiware cocinando pasta" />
               <aside>
                 <h4>Ingredientes</h4>
                 <p><strong>La Pasta</strong></p>
@@ -280,7 +280,7 @@ function Chiikawa() {
           <article>
             <h3>Dorayaki (Pancakes con Pasta de Frijol)</h3>
             <div className="cuerpo-receta">
-              <img src="images/frijolverde.png" alt="Imagen de Dorayakis tiernos" />
+              <img src="images/relleno.png" alt="Imagen de Dorayakis tiernos" />
               <aside>
                 <h4>Ingredientes</h4>
                 <p><strong>La Masa (Pancakes de Miel)</strong></p>
@@ -324,7 +324,7 @@ function Chiikawa() {
           <article>
             <h3>Pudding de Vainilla</h3>
             <div className="cuerpo-receta">
-              <img src="images/pudding.png" alt="Imagen de Pudding de Vainilla" />
+              <img src="images/puding.png" alt="Imagen de Pudding de Vainilla" />
               <aside>
                 <h4>Ingredientes</h4>
                 <p><strong>La Base Cremosa</strong></p>
@@ -359,7 +359,7 @@ function Chiikawa() {
           <article>
             <h3>Soufflé Pancakes (Panqueques de Nube)</h3>
             <div className="cuerpo-receta">
-              <img src="images/panqueques.png" alt="Imagen de panqueques esponjosos" />
+              <img src="images/pancakes.png" alt="Imagen de panqueques esponjosos" />
               <aside>
                 <h4>Ingredientes</h4>
                 <p><strong>La Base de Yema</strong></p>
