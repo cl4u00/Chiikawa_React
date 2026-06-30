@@ -1,20 +1,37 @@
 import Cart from '../components/Cart';
-import { useContext } from 'react';
+import { useContext, useState, useEffect } from 'react';
 import { CartContext } from '../context/CartContext';
-import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import AdminPanel from '../components/AdminPanel';
 
 function Chiikawa() {
   const { cart, addToCart } = useContext(CartContext);
-  const { t } = useTranslation(); // Hook de traducción
+  const { t } = useTranslation();
+  
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [usuario, setUsuario] = useState(null);
+  const [rol, setRol] = useState('usuario');
   const [carritoAbierto, setCarritoAbierto] = useState(false);
+  
+  const [panelAdminAbierto, setPanelAdminAbierto] = useState(false);
+  // <-- ESTADO PARA LAS RECETAS DINÁMICAS
+  const [recetas, setRecetas] = useState(() => {
+    const guardadas = localStorage.getItem('chiikawa_recetas');
+    return guardadas ? JSON.parse(guardadas) : [];
+  });
 
   useEffect(() => {
     const usuarioGuardado = localStorage.getItem("usuarioLogueado");
-    if (usuarioGuardado) setUsuario(usuarioGuardado);
+    if (usuarioGuardado) {
+      try {
+        const datos = JSON.parse(usuarioGuardado);
+        setUsuario(datos.nombre);
+        setRol(datos.rol); // Obtenemos el rol guardado en registro.jsx
+      } catch(e) {
+        setUsuario(usuarioGuardado);
+      }
+    }
   }, []);
 
 const toggleMenu = () => setMenuAbierto(!menuAbierto);
@@ -23,8 +40,14 @@ const toggleMenu = () => setMenuAbierto(!menuAbierto);
     e.preventDefault();
     localStorage.removeItem("usuarioLogueado");
     setUsuario(null);
+    setRol('usuario');
     window.location.reload();
   };
+  
+  console.log("--- DEBUG ADMIN ---");
+  console.log("panelAdminAbierto:", panelAdminAbierto);
+  console.log("rol:", rol);
+  console.log("usuario:", usuario);
 
   return (
     <div className="pagina-chiikawa">
@@ -58,7 +81,9 @@ const toggleMenu = () => setMenuAbierto(!menuAbierto);
 
         {/* Menú de usuario (Hamburguesa) */}
         <div className="user-menu-container">
-          <button className="hamburger-btn" onClick={toggleMenu}><span></span><span></span><span></span></button>
+          <button className="hamburger-btn" onClick={toggleMenu}>
+            <span></span><span></span><span></span>
+          </button>
           <div className={`dropdown-menu ${menuAbierto ? 'show' : ''}`}>
             {!usuario ? (
               <div id="auth-links" style={{ display: 'flex', flexDirection: 'column' }}>
@@ -66,10 +91,20 @@ const toggleMenu = () => setMenuAbierto(!menuAbierto);
                 <Link to="/registro">{t('auth.registro')}</Link>
               </div>
             ) : (
-              <div id="user-info">
+              <div id="user-info" style={{ display: 'flex', flexDirection: 'column', gap: '5px' }}>
                 <span className="welcome-text">{t('auth.bienvenido')}, <b>{usuario}</b></span>
                 <hr style={{ margin: '5px 0' }} />
-                <a href="#" onClick={logout}>{t('auth.logout')}</a>
+                
+                {/* 👇 BOTÓN ESPECIAL SOLO PARA ADMIN 👇 */}
+                {rol === 'admin' && (
+                  <button 
+                    onClick={() => { setPanelAdminAbierto(true); setMenuAbierto(false); }} 
+                    style={{ background: '#ffb6c1', border: 'none', padding: '5px', borderRadius: '5px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    🛠️ Panel Admin
+                  </button>
+                )}
+
+                <a href="#" onClick={logout} style={{ marginTop: '5px' }}>{t('auth.logout')}</a>
               </div>
             )}
           </div>
@@ -414,6 +449,32 @@ const toggleMenu = () => setMenuAbierto(!menuAbierto);
               </ol>
             </div>
           </article>
+          <div style={{ marginTop: '60px' }}>
+            <h3 style={{ textAlign: 'center', borderBottom: '2px dashed #ffb6c1', paddingBottom: '10px' }}>
+              Nuevas Recetas Añadidas
+            </h3>
+            
+            <div className="grid-recetas" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
+              {recetas.length === 0 ? (
+                <p style={{ textAlign: 'center', width: '100%' }}>
+                  Aún no hay recetas adicionales. Ingresa como <b>admin@chiikawa.com</b> para agregar la primera.
+                </p>
+              ) : (
+                recetas.map(receta => (
+                  <article key={receta.id} style={{ width: '300px', background: 'white', borderRadius: '15px', padding: '15px', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                    <h3 style={{ textAlign: 'center', fontSize: '18px', marginBottom: '10px' }}>{receta.titulo}</h3>
+                    <img src={receta.imagen} alt={receta.titulo} style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '10px' }} />
+                    <p style={{ fontSize: '14px', marginTop: '10px', color: '#555' }}>{receta.descripcion}</p>
+                    <button 
+                      onClick={() => addToCart({ id: receta.id, name: receta.titulo, price: 15 })}
+                      style={{ width: '100%', padding: '10px', background: '#4980f8', color: 'white', border: 'none', borderRadius: '10px', marginTop: '15px', cursor: 'pointer', fontWeight: 'bold' }}>
+                      ¡Comprar Ingredientes! 🛒
+                    </button>
+                  </article>
+                ))
+              )}
+            </div>
+          </div>
         </section>
       </main>
 
@@ -452,7 +513,10 @@ const toggleMenu = () => setMenuAbierto(!menuAbierto);
         </svg>
       </a>
       {/* Si carritoAbierto es true, mostramos el componente Cart */}
-   {carritoAbierto && <Cart onClose={() => setCarritoAbierto(false)} />}
+      {carritoAbierto && <Cart onClose={() => setCarritoAbierto(false)} />}
+      
+      {/* Si panelAdminAbierto es true, mostramos el AdminPanel */}
+      {panelAdminAbierto && <AdminPanel recetas={recetas} setRecetas={setRecetas} onClose={() => setPanelAdminAbierto(false)} />}
     </div>
   );
 }

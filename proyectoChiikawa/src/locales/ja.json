@@ -1,26 +1,17 @@
 {
-  "bienvenida": "ちいかわへようこそ",
-  "cambiar_idioma": "言語を変更",
+  "bienvenida": "チイカワへようこそ",
+  "cambiar_idioma": "言語を変更する",
   "menu": {
-    "historia": "物語",
-    "recetas": "塩味のレシピ",
+    "historia": "沿革",
+    "recetas": "お惣菜のレシピ",
     "postres": "デザート",
     "contacto": "お問い合わせ",
     "carrito": "カートを見る"
   },
   "auth": {
     "login": "ログイン",
-    "registro": "登録",
+    "registro": "登録する",
     "logout": "ログアウト",
-    "bienvenido": "こんにちは",
-    "crear_cuenta": "アカウントを作成",
-    "nombre_usuario": "ユーザー名",
-    "correo": "メールアドレス",
-    "password": "8文字以上",
-    "confirmar_password": "パスワードを確認",
-    "escribenos": "こちらからご連絡ください！",
-    "sobre_proyecto": "プロジェクトについて",
-    "terminos": "利用規約",
-    "privacidad": "プライバシーポリシー"
+    "bienvenido": "こんにちは"
   }
 }
