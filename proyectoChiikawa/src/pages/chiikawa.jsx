@@ -3,25 +3,21 @@ import { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Chiikawa() {
   const { cart, addToCart } = useContext(CartContext);
-  // Estados para controlar el menú hamburguesa y el usuario logueado
+  const { t } = useTranslation(); // Hook de traducción
   const [menuAbierto, setMenuAbierto] = useState(false);
   const [usuario, setUsuario] = useState(null);
   const [carritoAbierto, setCarritoAbierto] = useState(false);
 
   useEffect(() => {
-    // Al cargar la página, verificamos si hay alguien logueado
     const usuarioGuardado = localStorage.getItem("usuarioLogueado");
-    if (usuarioGuardado) {
-      setUsuario(usuarioGuardado);
-    }
+    if (usuarioGuardado) setUsuario(usuarioGuardado);
   }, []);
 
-  const toggleMenu = () => {
-    setMenuAbierto(!menuAbierto);
-  };
+const toggleMenu = () => setMenuAbierto(!menuAbierto);
 
   const logout = (e) => {
     e.preventDefault();
@@ -45,38 +41,35 @@ function Chiikawa() {
         </div>
 
         <nav className="menu-principal">
-       <ul>
-         <li><a href="#introduccion">Historia</a></li>
-         <li><a href="#recetas-saladas">Recetas Saladas</a></li>
-         <li><a href="#postres">Postres</a></li>
-         <li><a href="#redes-footer">Contacto</a></li>
-         {/* Nuevo botón para el carrito 👇 */}
-         <li>
-           <button 
-             onClick={() => setCarritoAbierto(true)} 
-             style={{ background: 'none', border: 'none', color: '#4980f8', fontWeight: 'bold', cursor: 'pointer', fontSize: '16px' }}>
-             🛒 Ver Carrito
-           </button>
-         </li>
-       </ul>
-     </nav>
+          <ul>
+            <li><a href="#introduccion">{t('menu.historia')}</a></li>
+            <li><a href="#recetas-saladas">{t('menu.recetas')}</a></li>
+            <li><a href="#postres">{t('menu.postres')}</a></li>
+            <li><a href="#redes-footer">{t('menu.contacto')}</a></li>
+            <li>
+              <button 
+                onClick={() => setCarritoAbierto(true)} 
+                style={{ background: 'none', border: 'none', color: '#4980f8', fontWeight: 'bold', cursor: 'pointer', fontSize: '16px' }}>
+                🛒 {t('menu.carrito')}
+              </button>
+            </li>
+          </ul>
+        </nav>
 
         {/* Menú de usuario (Hamburguesa) */}
         <div className="user-menu-container">
-          <button className="hamburger-btn" onClick={toggleMenu}>
-            <span></span><span></span><span></span>
-          </button>
+          <button className="hamburger-btn" onClick={toggleMenu}><span></span><span></span><span></span></button>
           <div className={`dropdown-menu ${menuAbierto ? 'show' : ''}`}>
             {!usuario ? (
               <div id="auth-links" style={{ display: 'flex', flexDirection: 'column' }}>
-                <Link to="/registro">Iniciar Sesión</Link>
-                <Link to="/registro">Registrarme</Link>
+                <Link to="/registro">{t('auth.login')}</Link>
+                <Link to="/registro">{t('auth.registro')}</Link>
               </div>
             ) : (
               <div id="user-info">
-                <span className="welcome-text">Hola, <b>{usuario}</b></span>
+                <span className="welcome-text">{t('auth.bienvenido')}, <b>{usuario}</b></span>
                 <hr style={{ margin: '5px 0' }} />
-                <a href="#" onClick={logout}>Cerrar Sesión</a>
+                <a href="#" onClick={logout}>{t('auth.logout')}</a>
               </div>
             )}
           </div>

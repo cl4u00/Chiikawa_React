@@ -1,0 +1,56 @@
+.language-selector-container {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 9999; /* Asegura que esté por encima de todo */
+}
+
+.language-selector-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
+  font-size: 24px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, background-color 0.2s ease;
+  padding: 0;
+}
+
+.language-selector-btn:hover {
+  transform: scale(1.1);
+  background-color: #f3f4f6;
+}
+
+.language-selector-menu {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  min-width: 60px;
+}
+
+.language-selector-menu button {
+  padding: 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  color: #374151;
+  transition: background-color 0.2s;
+}
+
+.language-selector-menu button:hover {
+  background-color: #e5e7eb;
+}

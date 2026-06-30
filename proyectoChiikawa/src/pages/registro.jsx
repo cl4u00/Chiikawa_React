@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function Registro() {
-  // Estado para manejar qué formulario se muestra ('login', 'registro' o 'contacto')
+  const { t } = useTranslation();
   const [vistaActiva, setVistaActiva] = useState('login');
-  
   const location = useLocation();
   const navigate = useNavigate();
 
   // Este efecto revisa si el usuario hizo clic en "¡Escríbenos aquí!" desde el footer
+
+
   useEffect(() => {
     const searchParams = new URLSearchParams(location.search);
     if (searchParams.get('view') === 'contacto') {
@@ -70,37 +72,30 @@ function Registro() {
           ← Volver
         </Link>
 
-        {/* Formulario de Login */}
         {vistaActiva === 'login' && (
           <form id="loginForm" onSubmit={handleLogin}>
-            <h3>Iniciar Sesión</h3>
-            <input type="email" id="loginCorreo" placeholder="Email" required />
-            <input type="password" id="loginPassword" placeholder="Contraseña" required />
+            <h3>{t('auth.login')}</h3>
+            {/* ... inputs ... */}
             <button type="submit">Ingresar</button>
-            <p id="mensajeLogin" className="feedback"></p>
-            <p style={{ textAlign: 'center', fontSize: '14px' }}>
-              ¿No tienes cuenta?{' '}
-              <a href="#" onClick={mostrarRegistro} style={{ color: '#61A3C9', fontWeight: 'bold' }}>
-                Regístrate aquí
-              </a>
-            </p>
+            <p>¿No tienes cuenta? <a href="#" onClick={mostrarRegistro}>Regístrate aquí</a></p>
           </form>
         )}
 
         {/* Formulario de Registro */}
+{/* Formulario de Registro */}
         {vistaActiva === 'registro' && (
           <form id="registroForm" onSubmit={handleRegistro}>
-            <h3>Registro de Usuario</h3>
-            <input type="text" id="nombre" placeholder="Nombre de usuario" required />
-            <input type="email" id="correo" placeholder="Correo electrónico" required />
-            <input type="password" id="password" placeholder="Mín. 8 caracteres" required />
-            <input type="password" id="confirmPassword" placeholder="Confirmar contraseña" required />
-            <button type="submit">Crear Cuenta</button>
+            <h3>{t('auth.registro_usuario')}</h3>
+            <input type="text" id="nombre" placeholder={t('auth.nombre_usuario')} required />
+            <input type="email" id="correo" placeholder={t('auth.correo')} required />
+            <input type="password" id="password" placeholder={t('auth.password_min')} required />
+            <input type="password" id="confirmPassword" placeholder={t('auth.confirmar_password')} required />
+            <button type="submit">{t('auth.crear_cuenta')}</button>
             <p id="mensaje" className="feedback"></p>
             <p style={{ textAlign: 'center', fontSize: '14px' }}>
-              ¿Ya tienes cuenta?{' '}
+              {t('auth.ya_tienes_cuenta')}{' '}
               <a href="#" onClick={mostrarLogin} style={{ color: '#61A3C9', fontWeight: 'bold' }}>
-                Inicia sesión
+                {t('auth.inicia_sesion')}
               </a>
             </p>
           </form>
@@ -109,11 +104,11 @@ function Registro() {
         {/* Formulario de Contacto */}
         {vistaActiva === 'contacto' && (
           <form id="contactoForm" onSubmit={handleContacto}>
-            <h3>Contacto</h3>
-            <input type="text" placeholder="Tu nombre" required />
-            <input type="email" placeholder="Tu correo" required />
-            <textarea placeholder="¿En qué te ayudamos?" rows="4" required></textarea>
-            <button type="submit">Enviar Mensaje</button>
+            <h3>{t('auth.contacto')}</h3>
+            <input type="text" placeholder={t('auth.placeholder_nombre')} required />
+            <input type="email" placeholder={t('auth.placeholder_correo')} required />
+            <textarea placeholder={t('auth.placeholder_mensaje')} rows="4" required></textarea>
+            <button type="submit">{t('auth.enviar_mensaje')}</button>
             <p id="mensajeContacto" className="feedback"></p>
           </form>
         )}

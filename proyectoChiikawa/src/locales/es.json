@@ -1,0 +1,18 @@
+{
+  "bienvenida": "Bienvenido a Chiikawa",
+  "cambiar_idioma": "Cambiar Idioma",
+  
+  "menu": {
+    "historia": "Historia",
+    "recetas": "Recetas Saladas",
+    "postres": "Postres",
+    "contacto": "Contacto",
+    "carrito": "Ver Carrito"
+  },
+  "auth": {
+    "login": "Iniciar Sesión",
+    "registro": "Registrarme",
+    "logout": "Cerrar Sesión",
+    "bienvenido": "Hola"
+  }
+}
