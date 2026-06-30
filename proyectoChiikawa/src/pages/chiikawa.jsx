@@ -450,14 +450,14 @@ const toggleMenu = () => setMenuAbierto(!menuAbierto);
             </div>
           </article>
           <div style={{ marginTop: '60px' }}>
-            <h3 style={{ textAlign: 'center', borderBottom: '2px dashed #ffb6c1', paddingBottom: '10px' }}>
+            <h3 style={{ textAlign: 'center', borderBottom: '2px dashed #ffb6c1', paddingBottom: '10px', color: 'white' }}>
               Nuevas Recetas Añadidas
             </h3>
             
             <div className="grid-recetas" style={{ display: 'flex', gap: '20px', flexWrap: 'wrap', justifyContent: 'center', marginTop: '20px' }}>
               {recetas.length === 0 ? (
-                <p style={{ textAlign: 'center', width: '100%' }}>
-                  Aún no hay recetas adicionales. Ingresa como <b>admin@chiikawa.com</b> para agregar la primera.
+                <p style={{ textAlign: 'center', width: '100%', color: '#999' }}>
+                  No hay recetas encontradas
                 </p>
               ) : (
                 recetas.map(receta => (

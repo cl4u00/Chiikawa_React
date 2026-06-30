@@ -20,3 +20,22 @@
     opacity: 0;
   }
 }
+
+/* Estilos para scrollbar personalizada */
+.admin-panel::-webkit-scrollbar {
+  width: 8px;
+}
+
+.admin-panel::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.admin-panel::-webkit-scrollbar-thumb {
+  background: #ff69b4;
+  border-radius: 10px;
+}
+
+.admin-panel::-webkit-scrollbar-thumb:hover {
+  background: #ff1493;
+}
