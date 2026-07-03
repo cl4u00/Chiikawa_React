@@ -1,41 +1,120 @@
-/* Animación del Toast */
-@keyframes slideIn {
-  from {
-    transform: translateX(400px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+/* Importamos fuentes redondeadas y tiernas de Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@600;800&family=Quicksand:wght@600;700&display=swap');
+
+/* --- Contenedor Principal del Panel --- */
+.admin-panel-container {
+  font-family: 'Quicksand', 'Nunito', sans-serif;
+  background-color: #FFFCDF; /* Amarillo pastel muy suave (color base de Usagi) */
+  color: #7D5A50; /* Marrón suave para el texto, más cálido y tierno que el negro */
+  padding: 25px;
+  border-radius: 30px;
+  border: 4px dashed #FFD166; /* Borde punteado naranja/amarillo tierno */
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  to {
-    transform: translateX(400px);
-    opacity: 0;
-  }
+/* Títulos */
+.admin-panel-container h1, 
+.admin-panel-container h2, 
+.admin-panel-container h3 {
+  color: #FF9F1C; /* Naranja vibrante característico de Usagi */
+  font-weight: 700;
+  text-align: center;
 }
 
-/* Estilos para scrollbar personalizada */
-.admin-panel::-webkit-scrollbar {
-  width: 8px;
+/* --- Tarjetas (Subir Receta y Buscar) --- */
+.admin-card {
+  background-color: #FFFFFF;
+  border-radius: 25px;
+  padding: 20px;
+  box-shadow: 0 8px 16px rgba(255, 175, 75, 0.15); /* Sombra cálida y suave */
+  border: 3px solid #FFE499; /* Borde amarillo tierno */
+  margin-bottom: 20px;
 }
 
-.admin-panel::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+/* --- Inputs y Textareas --- */
+.admin-card input[type="text"],
+.admin-card textarea {
+  width: 100%;
+  padding: 12px 15px;
+  border-radius: 15px;
+  border: 2px solid #FFE499;
+  background-color: #FFFEF4;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+  color: #7D5A50;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  margin-bottom: 15px;
 }
 
-.admin-panel::-webkit-scrollbar-thumb {
-  background: #ff69b4;
-  border-radius: 10px;
+/* Efecto al hacer clic para escribir */
+.admin-card input[type="text"]:focus,
+.admin-card textarea:focus {
+  outline: none;
+  border-color: #FF9F1C;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(255, 159, 28, 0.2);
 }
 
-.admin-panel::-webkit-scrollbar-thumb:hover {
-  background: #ff1493;
+/* --- Botones Principales (Guardar / Buscar) --- */
+.admin-card button,
+.btn-guardar,
+.btn-buscar {
+  background-color: #FFB703; /* Amarillo/Naranja vibrante */
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 #E09E00; /* Efecto 3D de botón aplastable */
+  transition: all 0.1s ease;
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Efecto hover/click tierno (Botones principales) */
+.admin-card button:hover,
+.btn-guardar:hover,
+.btn-buscar:hover {
+  background-color: #FF9F1C;
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 #E09E00;
+}
+
+.admin-card button:active,
+.btn-guardar:active,
+.btn-buscar:active {
+  transform: translateY(5px);
+  box-shadow: none;
+}
+
+/* --- Botón Cerrar (Inspirado en las mejillas rosadas) --- */
+.btn-cerrar {
+  background-color: #FF9EAA; /* Rosado tierno */
+  color: white;
+  font-family: 'Quicksand', sans-serif;
+  border-radius: 20px;
+  padding: 10px 20px;
+  border: none;
+  font-weight: 700;
+  box-shadow: 0 4px 0 #E57A88; /* Efecto 3D rosado */
+  cursor: pointer;
+  transition: all 0.1s ease;
+  float: right;
+  font-size: 15px;
+}
+
+.btn-cerrar:hover {
+  background-color: #FF7A8A;
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #E57A88;
+}
+
+.btn-cerrar:active {
+  transform: translateY(4px);
+  box-shadow: none;
 }
